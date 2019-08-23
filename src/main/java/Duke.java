@@ -14,20 +14,21 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
         Scanner input = new Scanner(System.in);
-        List<String> myList = new ArrayList();
-
+        String[] myList = new String[100];
+        int size_ = 0;
         while (true) {
             String command = input.nextLine();
             System.out.println(line);
             if (command.equals("list")) {
-                for (int x = 0; x < myList.size(); x ++) {
-                    System.out.println(Integer.toString(x + 1) + ". " + myList.get(x));
+                for (int x = 0; x < size_; x ++) {
+                    System.out.println(Integer.toString(x + 1) + ". " + myList[x]);
                 }
             }
             else if (command.equals("bye")) break;
             else {
                 System.out.println("added: "  + command);
-                myList.add(command);
+                myList[size_] = command;
+                size_ += 1;
             }
             System.out.println(line);
         }
