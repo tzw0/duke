@@ -14,17 +14,24 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
         Scanner input = new Scanner(System.in);
-        String command = input.next();
-        String end0 = "bye";
-        List myList = new ArrayList();
+        List<String> myList = new ArrayList();
+
         while (true) {
-            if (command.equals("bye")) break;
+            String command = input.nextLine();
             System.out.println(line);
-            System.out.println(command);
+            if (command.equals("list")) {
+                for (int x = 0; x < myList.size(); x ++) {
+                    System.out.println(Integer.toString(x + 1) + ". " + myList.get(x));
+                }
+            }
+            else if (command.equals("bye")) break;
+            else {
+                System.out.println("added: "  + command);
+                myList.add(command);
+            }
             System.out.println(line);
-            command = input.next();
         }
-        System.out.println(line);
+
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
     }
