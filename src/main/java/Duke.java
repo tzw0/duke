@@ -15,19 +15,34 @@ public class Duke {
         System.out.println(line);
         Scanner input = new Scanner(System.in);
         String[] myList = new String[100];
+        Boolean[] checklist = new Boolean[100];
         int size_ = 0;
         while (true) {
             String command = input.nextLine();
+            String sentence[] = command.split(" ");
             System.out.println(line);
             if (command.equals("list")) {
                 for (int x = 0; x < size_; x ++) {
-                    System.out.println(Integer.toString(x + 1) + ". " + myList[x]);
+                    System.out.print(Integer.toString(x + 1) + ".");
+                    //System.out.println(checklist);
+                    if (checklist[x]) System.out.print("[✓] ");
+                    else System.out.print("[✗] ");
+                    System.out.println(myList[x]);
                 }
             }
             else if (command.equals("bye")) break;
+            else if (sentence[0].equals("done")) {
+                int index = Integer.parseInt(sentence[1] ) -1;
+                if (size_ >= index) {
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[✓] " + myList[index]);
+                    checklist[index] = true;
+                }
+            }
             else {
                 System.out.println("added: "  + command);
                 myList[size_] = command;
+                checklist[size_] = false;
                 size_ += 1;
             }
             System.out.println(line);
