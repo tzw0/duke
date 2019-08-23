@@ -18,4 +18,7 @@ public class Task {
         public void setDescription(String d) {
             this.description = d;
         }
+        public String toString() {
+            return (isDone ? "[✓] " : "[✗] ") + this.description;
+        }
 }

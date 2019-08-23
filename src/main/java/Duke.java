@@ -22,10 +22,10 @@ public class Duke {
             String sentence[] = command.split(" ");
             System.out.println(line);
             if (command.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 for (int x = 0; x < size_; x ++) {
                     System.out.print(Integer.toString(x + 1) + ".");
-                    System.out.print(myList[x].getStatusIcon());
-                    System.out.println(myList[x].describe());
+                    System.out.println(myList[x].toString());
                 }
             }
             else if (command.equals("bye")) break;
@@ -37,14 +37,28 @@ public class Duke {
                     myList[index].done(true);
                 }
             }
-            else {
-                System.out.println("added: "  + command);
-                myList[size_] = new Task(command, false);
+            else if (sentence[0].equals("todo") || sentence[0].equals("deadline") || sentence[0].equals("event")) {
+                if (sentence[0].equals("todo")) {
+                    myList[size_] = new Todo(command.substring(5));
+                } else if (sentence[0].equals("deadline")) {
+                    int end_by = command.indexOf("/by");
+                    String by = command.substring(end_by + 4);
+                    myList[size_] = new Deadline(command.substring(9, end_by - 1), by);
+                } else if (sentence[0].equals("event")) {
+                    int end_at = command.indexOf("/at");
+                    String at = command.substring(end_at + 4);
+                    myList[size_] = new Event(command.substring(6, end_at - 1), at);
+                }
+                System.out.println("Got it. I've added this task:");
+                System.out.println("\t" + myList[size_].toString());
+                System.out.println("Now you have "+ Integer.toString(size_ + 1) +" tasks in the list.");
                 size_ += 1;
+            }
+            else {
+                System.out.println("Sorry, that is not a registered command for duke :(");
             }
             System.out.println(line);
         }
-
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
     }
