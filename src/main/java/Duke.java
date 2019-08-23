@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Duke {
     public static void main(String[] args) {
         String line = " ____________________________________________________________";
@@ -14,8 +15,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
         Scanner input = new Scanner(System.in);
-        String[] myList = new String[100];
-        Boolean[] checklist = new Boolean[100];
+        Task[] myList = new Task[100];
         int size_ = 0;
         while (true) {
             String command = input.nextLine();
@@ -24,10 +24,8 @@ public class Duke {
             if (command.equals("list")) {
                 for (int x = 0; x < size_; x ++) {
                     System.out.print(Integer.toString(x + 1) + ".");
-                    //System.out.println(checklist);
-                    if (checklist[x]) System.out.print("[✓] ");
-                    else System.out.print("[✗] ");
-                    System.out.println(myList[x]);
+                    System.out.print(myList[x].getStatusIcon());
+                    System.out.println(myList[x].describe());
                 }
             }
             else if (command.equals("bye")) break;
@@ -35,14 +33,13 @@ public class Duke {
                 int index = Integer.parseInt(sentence[1] ) -1;
                 if (size_ >= index) {
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[✓] " + myList[index]);
-                    checklist[index] = true;
+                    System.out.println("[✓] " + myList[index].describe());
+                    myList[index].done(true);
                 }
             }
             else {
                 System.out.println("added: "  + command);
-                myList[size_] = command;
-                checklist[size_] = false;
+                myList[size_] = new Task(command, false);
                 size_ += 1;
             }
             System.out.println(line);
