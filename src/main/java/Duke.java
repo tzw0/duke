@@ -1,7 +1,15 @@
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Duke {
     public static void main(String[] args) {
+        String directory = System.getProperty("user.home");
+        directory += "\\documents\\duke\\data";
+        String savefile = "duke.txt";
+        String absolutePath = directory + File.separator + savefile;
         String line = " ____________________________________________________________";
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -15,9 +23,24 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
         Scanner input = new Scanner(System.in);
-        ArrayList<Task> myList = new ArrayList<Task>();
-        int size_ = 0;
+        DukeArrayList myList = new DukeArrayList();
+        String file_content = "";
+        try (BufferedReader br = new BufferedReader(new FileReader(absolutePath))) {
+            String line_X;
+            while ((line_X = br.readLine()) != null) {
+                file_content += line_X + "\n";
+            }
+        } catch (IOException e) {
+            System.out.println("duke.txt file not found, creating file...");
+        }
+        if (!file_content.isBlank()) myList.fromFile(file_content);
+        int size_ = myList.size();
         while (true) {
+            try (PrintWriter out = new PrintWriter(absolutePath)) {
+                out.println(myList.toFile());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             Boolean no_error = true;
             String command = input.nextLine();
             System.out.println(line);
@@ -84,8 +107,7 @@ public class Duke {
                         myList.add(new Todo(command.substring(5)));
                     } catch (DukeException e) {
                         no_error = false;
-                        if (e.equals("empty task"))
-                            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
                     } catch (StringIndexOutOfBoundsException e) {
                         no_error = false;
                         System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -103,7 +125,7 @@ public class Duke {
                         if (e.equals("empty task"))
                             System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
                         else {
-                            System.out.println("☹ OOPS!!! The deadline of a deadline cannot be empty");
+                            System.out.println(e.response());
                         }
                     } catch (StringIndexOutOfBoundsException e) {
                         no_error = false;
@@ -122,7 +144,7 @@ public class Duke {
                         if (e.equals("empty task"))
                             System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
                         else
-                            System.out.println("☹ OOPS!!! The time and date of an event cannot be empty.");
+                            System.out.println(e.response());
                     } catch (StringIndexOutOfBoundsException e) {
                         no_error = false;
                         System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
