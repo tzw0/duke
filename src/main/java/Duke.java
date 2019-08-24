@@ -43,7 +43,7 @@ public class Duke {
                 }
             }
             else if (command.equals("bye")) break;
-            else if (sentence[0].equals("done")) {
+            else if (sentence[0].equals("done") || sentence[0].equals("delete")) {
                 int index = -1;
                 try {
                     index = Integer.parseInt(sentence[1]) -1;
@@ -61,9 +61,18 @@ public class Duke {
                     continue;
                 }
                 if (size_ > index && index >= 0) {
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[✓] " + myList.get(index).describe());
-                    myList.get(index).done(true);
+                    if (sentence[0].equals("done")) {
+                        System.out.println("Nice! I've marked this task as done:");
+                        System.out.println("[✓] " + myList.get(index).describe());
+                        myList.get(index).done(true);
+                    }
+                    else if (sentence[0].equals("delete")) {
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println("\t" + myList.get(index).toString());
+                        myList.remove(index);
+                        size_ = myList.size();
+                        System.out.println("Now you have " + Integer.toString(size_) + " tasks in the list.");
+                    }
                 }
                 else {
                     System.out.println("☹ OOPS!!! There are no such tasks with this index, you have "+ Integer.toString(size_ ) + " task(s) in the list.");
