@@ -15,7 +15,7 @@ public class Duke {
         System.out.println("What can I do for you?");
         System.out.println(line);
         Scanner input = new Scanner(System.in);
-        Task[] myList = new Task[100];
+        ArrayList<Task> myList = new ArrayList<Task>();
         int size_ = 0;
         while (true) {
             Boolean no_error = true;
@@ -34,9 +34,12 @@ public class Duke {
                     continue;
                 }
                 System.out.println("Here are the tasks in your list:");
-                for (int x = 0; x < size_; x ++) {
+                int x = 0;
+                Iterator itr=myList.iterator();
+                while(itr.hasNext()){
                     System.out.print(Integer.toString(x + 1) + ".");
-                    System.out.println(myList[x].toString());
+                    System.out.println(itr.next().toString());
+                    x ++;
                 }
             }
             else if (command.equals("bye")) break;
@@ -52,11 +55,15 @@ public class Duke {
                     System.out.println("☹ OOPS!!! Please enter the index number you want to mark as done");
                     System.out.println(line);
                     continue;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! No tasks index specified");
+                    System.out.println(line);
+                    continue;
                 }
                 if (size_ > index && index >= 0) {
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[✓] " + myList[index].describe());
-                    myList[index].done(true);
+                    System.out.println("[✓] " + myList.get(index).describe());
+                    myList.get(index).done(true);
                 }
                 else {
                     System.out.println("☹ OOPS!!! There are no such tasks with this index, you have "+ Integer.toString(size_ ) + " task(s) in the list.");
@@ -65,7 +72,7 @@ public class Duke {
             else if (sentence[0].equals("todo") || sentence[0].equals("deadline") || sentence[0].equals("event")) {
                 if (sentence[0].equals("todo")) {
                     try {
-                        myList[size_] = new Todo(command.substring(5));
+                        myList.add(new Todo(command.substring(5)));
                     } catch (DukeException e) {
                         no_error = false;
                         if (e.equals("empty task"))
@@ -78,10 +85,10 @@ public class Duke {
                     try {
                         Integer end_by = command.indexOf(" /by ");
                         String by = command.substring(end_by + 5);
-                        myList[size_] = new Deadline(command.substring(9, (end_by >= 0 ? end_by : command.length())), by);
                         if (end_by.equals(-1)) {
                             throw new DukeException("blank by");
                         }
+                        myList.add(new Deadline(command.substring(9, (end_by >= 0 ? end_by : command.length())), by));
                     } catch (DukeException e) {
                         no_error = false;
                         if (e.equals("empty task"))
@@ -97,10 +104,10 @@ public class Duke {
                     try {
                         Integer end_at = command.indexOf(" /at ");
                         String at = command.substring(end_at + 5);
-                        myList[size_] = new Event(command.substring(6, end_at >= 0 ? end_at: command.length()), at);
                         if (end_at.equals(-1)) {
                             throw new DukeException("blank at");
                         }
+                        myList.add(new Event(command.substring(6, end_at >= 0 ? end_at: command.length()), at));
                     } catch (DukeException e) {
                         no_error = false;
                         if (e.equals("empty task"))
@@ -114,9 +121,9 @@ public class Duke {
                 }
                 if (no_error) {
                     System.out.println("Got it. I've added this task:");
-                    System.out.println("\t" + myList[size_].toString());
+                    System.out.println("\t" + myList.get(size_).toString());
                     System.out.println("Now you have " + Integer.toString(size_ + 1) + " tasks in the list.");
-                    size_ += 1;
+                    size_ = myList.size();
                 }
             }
             else {
