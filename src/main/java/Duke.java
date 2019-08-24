@@ -101,6 +101,28 @@ public class Duke {
                     System.out.println("☹ OOPS!!! There are no such tasks with this index, you have "+ Integer.toString(size_ ) + " task(s) in the list.");
                 }
             }
+            else if (sentence[0].equals("find")) {
+                try {
+                    String keyword = sentence[1];
+                    int x = 0;
+                    boolean have_result= false;
+                    if (keyword.isBlank()) throw new ArrayIndexOutOfBoundsException();
+                    System.out.println("Here are the matching tasks in your list:");
+                    for (Task task: myList) {
+                        if (task.toString().indexOf(keyword) != -1) {
+                            System.out.print(Integer.toString(x + 1) + ".");
+                            System.out.println(task.toString());
+                            x ++;
+                            have_result = true;
+                        }
+                    }
+                    if (have_result == false) {
+                        System.out.println("☹ Sorry, no results found");
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("☹ OOPS!!! Keyword is empty or blank");
+                }
+            }
             else if (sentence[0].equals("todo") || sentence[0].equals("deadline") || sentence[0].equals("event")) {
                 if (sentence[0].equals("todo")) {
                     try {
