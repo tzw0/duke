@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class DukeArrayList extends ArrayList<Task>{
@@ -19,15 +20,17 @@ public class DukeArrayList extends ArrayList<Task>{
                 if (attributes[0].equals("T")) {
                     this.add(new Todo(attributes[2], attributes[1].equals("true")));
                 } else if (attributes[0].equals("D")) {
-                    this.add(new Deadline(attributes[2], attributes[3], attributes[1].equals("true")));
+                    this.add(new Deadline(attributes[2], DatetimeCustom.check(attributes[3]), attributes[1].equals("true")));
                 } else if (attributes[0].equals("E")) {
-                    this.add(new Event(attributes[2], attributes[3], attributes[1].equals("true")));
+                    this.add(new Event(attributes[2], DatetimeCustom.check(attributes[3]), attributes[1].equals("true")));
                 } else {
                     System.out.println("☹ OOPS!!! Line " + Integer.toString(line) + " in duke.txt is corrupted" + ", skipping...");
                 }
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! Line " + Integer.toString(line) + " in duke.txt is corrupted[" + e + "], skipping...");
             } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("☹ OOPS!!! Line " + Integer.toString(line) + " in duke.txt is corrupted[" + e + "], skipping...");
+            } catch (ParseException e) {
                 System.out.println("☹ OOPS!!! Line " + Integer.toString(line) + " in duke.txt is corrupted[" + e + "], skipping...");
             }
         }

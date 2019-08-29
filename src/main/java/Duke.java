@@ -2,10 +2,16 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         String directory = System.getProperty("user.home");
         directory += "\\documents\\duke\\data";
         String savefile = "duke.txt";
@@ -49,6 +55,7 @@ public class Duke {
                 System.out.println(line);
                 continue;
             }
+
             String sentence[] = command.split(" ");
             if (command.equals("list")) {
                 if (size_==0) {
@@ -141,7 +148,7 @@ public class Duke {
                         if (end_by.equals(-1)) {
                             throw new DukeException("blank by");
                         }
-                        myList.add(new Deadline(command.substring(9, (end_by >= 0 ? end_by : command.length())), by));
+                        myList.add(new Deadline(command.substring(9, (end_by >= 0 ? end_by : command.length())), DatetimeCustom.check(by)));
                     } catch (DukeException e) {
                         no_error = false;
                         if (e.equals("empty task"))
@@ -152,6 +159,8 @@ public class Duke {
                     } catch (StringIndexOutOfBoundsException e) {
                         no_error = false;
                         System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    } catch (ParseException e) {
+                        System.out.println("☹ OOPS!!! Please ensure you have entered a valid date time (eg: mm should not exceed 12)");
                     }
                 } else if (sentence[0].equals("event")) {
                     try {
@@ -160,7 +169,7 @@ public class Duke {
                         if (end_at.equals(-1)) {
                             throw new DukeException("blank at");
                         }
-                        myList.add(new Event(command.substring(6, end_at >= 0 ? end_at: command.length()), at));
+                        myList.add(new Event(command.substring(6, end_at >= 0 ? end_at: command.length()), DatetimeCustom.check(at)));
                     } catch (DukeException e) {
                         no_error = false;
                         if (e.equals("empty task"))

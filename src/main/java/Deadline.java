@@ -1,34 +1,39 @@
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Deadline extends Task {
-    protected String by;
+    protected Date by;
+    DateFormat fmt = new SimpleDateFormat("dd MMMM yyyy, h:mm a", Locale.US);
 
-    public Deadline(String description, String by)  throws DukeException{
+    public Deadline(String description, String by) throws DukeException, ParseException {
         super(description, false);
         if (by.isBlank()) {
             throw new DukeException("blank by");
         }
-        this.by = DatetimeCustom.format(by);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hhmm");
+        Date date = sdf.parse(by);
+        this.by = date;
         super.tt = "D";
-        super.extra = this.by;
+        super.extra = by;
     }
-    public Deadline(String description, String by,boolean b)  throws DukeException{
+    public Deadline(String description, String by,boolean b) throws DukeException, ParseException {
         super(description, b);
         if (by.isBlank()) {
             throw new DukeException("blank by");
         }
-        this.by = DatetimeCustom.format(by);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy hhmm");
+        by = by.trim();
+        Date date = sdf.parse(by);
+        this.by = date;
         super.tt = "D";
-        super.extra = this.by;
+        super.extra = by;
     }
 
     @Override
     public String toString() {
-        try {
-            return "[D]" + super.toString() + " (by: " + DatetimeCustom.view(by) + ")";
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " +  DatetimeCustom.view(this.fmt.format(by)) + ")";
     }
 }
