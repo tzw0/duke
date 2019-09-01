@@ -31,6 +31,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
+import static java.lang.System.exit;
+
 public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -222,9 +224,10 @@ public class Duke extends Application {
         }
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
+        exit(0);
     }
 
-    @Override
+//    @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
 

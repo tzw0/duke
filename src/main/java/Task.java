@@ -24,7 +24,7 @@ public class Task {
             this.isDone = b;
         }
         public String toString() {
-//            return (isDone ? "[✓] " : "[✗] ") + this.description;
-            return (isDone ? "[Done] " : "[X] ") + this.description;
+            return (isDone ? "[✓] " : "[✗] ") + this.description;
+//            return (isDone ? "[Done] " : "[X] ") + this.description;
         }
 }
