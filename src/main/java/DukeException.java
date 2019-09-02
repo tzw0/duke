@@ -8,14 +8,20 @@ public class DukeException extends Exception {
     }
     public String response() {
         if(this.error.equals("datetime")) {
-            return "X OOPS!!! Please enter the datetime in this format: dd/mm/yyyy time(24hr)";
-        } else if(this.error.equals("blank at")) {
-            return ("X OOPS!!! The time and date of an event cannot be empty.");
-        } else if(this.error.equals("blank by")) {
-            return ("X OOPS!!! The time and date of a deadline cannot be empty");
-        } else if(this.error.equals("datetime_N")) {
-            return ("X OOPS!!! Please ensure you have entered a valid date time (eg: mm should not exceed 12)");
+            return "☹ OOPS!!! Please enter the datetime in this format: dd/mm/yyyy HHMM";
+        } else if(this.error.equals("unknown")) {
+            return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (this.error.equals("arg1 error find")) {
+            return "☹ OOPS!!! Please enter a keyword or phrase for your search";
+        } else if (this.error.equals("arg1 error todo")) {
+            return "☹ OOPS!!! The description of a todo cannot be blank";
+        } else if (this.error.equals("arg1 error deadline")) {
+            return "☹ OOPS!!! The description of a deadline cannot be blank";
+        } else if (this.error.equals("arg1 error event")) {
+            return "☹ OOPS!!! The description of an event cannot be blank";
+        } else if (this.error.equals("index error")) {
+            return "☹ OOPS!!! Please enter a valid task index number";
         }
-        return ("X OOPS!!! I'm sorry, but I don't know what that means :-(");
+        return ("☹ OOPS!!! " + this.error);
     }
 }

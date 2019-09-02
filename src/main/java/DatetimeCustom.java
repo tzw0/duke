@@ -34,16 +34,20 @@ public class DatetimeCustom extends Exception {
             String[] stndrd = {"st", "nd", "rd"};
             Integer day_i = Integer.parseInt(day);
             String day_x;
-            int min_start = str1.indexOf(':');
-            String min = "" + str1.charAt(min_start + 1) + str1.charAt(min_start + 2);
             if (day_i >= 10 && day_i <= 20 || day_i % 10 > 3 || day_i % 10 == 0) {
                 day_x = day_i.toString() + "th";
             } else {
                 day_x = day_i.toString() + stndrd[day_i % 10 - 1];
             }
             str1 = day_x + str1.substring(2);
+            int min_start = str1.indexOf(':');
+            String min = "" + str1.charAt(min_start + 1) + str1.charAt(min_start + 2);
+            String ampm = str1.substring(str1.length() - 2).toLowerCase();
             if (Integer.parseInt(min) == 0) {
-                str1 = str1.substring(0, min_start + 1) + " " + str1.substring(str1.length() - 2);
+                str1 = str1.substring(0, min_start) + ampm;
+            }
+            else {
+                str1 = str1.substring(0, str1.length() - 3) + ampm;
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();
