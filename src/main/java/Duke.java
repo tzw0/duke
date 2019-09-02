@@ -1,6 +1,4 @@
 import java.io.*;
-import java.text.ParseException;
-import java.util.*;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,7 +15,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import static java.lang.System.exit;
-import static java.lang.System.out;
 
 public class Duke extends Application {
     private ScrollPane scrollPane;
@@ -44,88 +41,27 @@ public class Duke extends Application {
         }
     }
 
-    public String run() {
-        ui.print_welcome();
-        Scanner input = new Scanner(System.in);
-        while (true) {
-            cycle(input.nextLine());
-        }
-    }
-
-    public String cycle(String command) {
-        String output = "";
-        int size_ = tasks.size();
-        tasks.save_to(storage.get_file_path());
-        Boolean no_error = true;
-        ui.print_line();
-        Parser parser;
-        try {
-            parser = new Parser(command, size_);
-        } catch (DukeException e) {
-            output += ui.print_this(e.response());
-            ui.print_line();
-            return output;
-        }
-        if (parser.command_is("list")) {
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                output += ui.print_this(tasks.print_list());
+                String fullCommand = ui.readCommand();
+                ui.showLine();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
             } catch (DukeException e) {
-                output += ui.showNoTasksError();
-                output += ui.print_line();
-                return output;
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
-        else if (parser.command_is("bye")) output += ui.close();
-        else if (parser.command_is("done")) {
-            output += ui.showTaskDone(tasks.get(parser.get_index()).describe());
-            tasks.doneTask(parser.get_index());
-        }
-        else if (parser.command_is("delete")) {
-            output += ui.showTaskDelete(tasks.get(parser.get_index()).toString(),size_ -1);
-            tasks.deleteTask(parser.get_index());
-        }
-        else if (parser.command_is("find")) {
-            output += ui.print_this(tasks.find(parser.get_arg1()));
-        }
-        else if (parser.command_is("todo")) {
-            try {
-                tasks.add(new Todo(parser.get_arg1()));
-            } catch (DukeException e) {
-                no_error = false;
-                output += ui.showEmptyTaskError("todo");
-            }
-        } else if (parser.command_is("deadline")) {
-            try {
-                tasks.add(new Deadline(parser.get_arg1(), parser.get_date(), false));
-            } catch (DukeException e) {
-                no_error = false;
-                if (e.equals("empty task"))
-                    output += ui.showEmptyTaskError("deadline");
-                else {
-                    output += ui.showDatetimeError("deadline");
-                }
-            }
-        } else if (parser.command_is("event")) {
-            try {
-                tasks.add(new Event(parser.get_arg1(), parser.get_date(), false));
-
-            } catch (DukeException e) {
-                no_error = false;
-                if (e.equals("empty task"))
-                    output += ui.showEmptyTaskError("event");
-                else
-                    output += ui.showDatetimeError("event");
-            }
-        }
-        if (parser.command_is("event") || parser.command_is("todo") || parser.command_is("deadline") ) {
-            if (no_error) output += ui.showTaskAdded(tasks.get(size_).toString(), size_ + 1);
-        }
-        output += ui.print_line();
-        return output;
     }
 
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
+        exit(0);
     }
 
 //    @Override
@@ -235,10 +171,15 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        String unhappyface = "☹ ";
+        String unhappyface = "\u2639";
         String tick = "✓";
         String cross = "✗";
-        input.replaceAll(tick, "ksadsd");
-        return cycle(input);
+        input = input.replace(unhappyface, "");
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }
