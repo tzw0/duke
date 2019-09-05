@@ -3,6 +3,7 @@ import java.util.Scanner;
 import static java.lang.System.*;
 
 public class Ui {
+    Scanner input = new Scanner(System.in);
     private String line = " ____________________________________________________________";
     private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -27,7 +28,6 @@ public class Ui {
         return thingy;
     }
     public String readCommand() {
-        Scanner input = new Scanner(System.in);
         return input.nextLine();
     }
     public String close() {
@@ -37,35 +37,36 @@ public class Ui {
     public String showError(String error_msg) {
         String out_ = "";
         if(error_msg.equals("datetime")) {
-            out_ =  "☹ OOPS!!! Please enter the datetime in this format: dd/mm/yyyy HHMM";
+            out_ =  "OOPS!!! Please enter the datetime in this format: dd/mm/yyyy HHMM";
         } else if(error_msg.equals("unknown")) {
-            out_ =  ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            out_ =  ("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } else if (error_msg.equals("arg1 error find")) {
-            out_ =  "☹ OOPS!!! Please enter a keyword or phrase for your search";
+            out_ =  "OOPS!!! Please enter a keyword or phrase for your search";
         } else if (error_msg.equals("arg1 error todo")) {
-            out_ =  "☹ OOPS!!! The description of a todo cannot be blank";
+            out_ =  "OOPS!!! The description of a todo cannot be blank";
         } else if (error_msg.equals("arg1 error deadline")) {
-            out_ =  "☹ OOPS!!! The description of a deadline cannot be blank";
+            out_ =  "OOPS!!! The description of a deadline cannot be blank";
         } else if (error_msg.equals("arg1 error event")) {
-            out_ =  "☹ OOPS!!! The description of an event cannot be blank";
+            out_ =  "OOPS!!! The description of an event cannot be blank";
         } else if (error_msg.equals("index error")) {
-            out_ =  "☹ OOPS!!! Please enter a valid task index number";
+            out_ =  "OOPS!!! Please enter a valid task index number";
         } else if (error_msg.equals("empty list")) {
-            out_ =  "☹ You have no tasks in your list";
+            out_ =  "You have no tasks in your list";
         } else if (error_msg.equals("empty task")) {
-            out_ ="☹ OOPS!!! The description of a task cannot be empty.";
+            out_ ="OOPS!!! The description of a task cannot be empty.";
         }
-        else out_ =  ("☹ OOPS!!! " + error_msg);
+        else out_ =  ("OOPS!!! " + error_msg);
         System.out.println(out_);
         return out_;
     }
     public String showLoadingError() {
-        String out_ = " ☹ OOPS!!! I'm sorry, but your saved file cannot be found";
+        String out_ = "OOPS!!! I'm sorry, but your saved file cannot be found";
         System.out.println(out_);
         return out_;
     }
     public String showTaskDone(String task) {
-        String out_ = "Nice! I've marked this task as done:\n" + "[✓] " + task;
+//        String out_ = "Nice! I've marked this task as done:\n" + "[✓] " + task;
+        String out_ = "Nice! I've marked this task as done:\n" + "[Done] " + task;
         System.out.println(out_);
         return out_;
     }
@@ -79,4 +80,5 @@ public class Ui {
         System.out.println(out_);
         return out_;
     }
+    //☹
 }

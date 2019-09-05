@@ -8,6 +8,7 @@ public class DeleteCommand extends Command {
         if (this.index >= tasks.size()) throw new DukeException("index error");
         String output = ui.showTaskDelete(tasks.get(this.index).toString(),tasks.size()-1);
         tasks.deleteTask(index);
+        tasks.save_to(storage.get_file_path());
         return output;
     }
 

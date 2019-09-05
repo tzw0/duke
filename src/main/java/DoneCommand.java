@@ -8,6 +8,7 @@ public class DoneCommand extends Command {
         if (this.index >= tasks.size()) throw new DukeException("index error");
         String output = ui.showTaskDone(tasks.get(this.index).describe());
         tasks.doneTask(this.index);
+        tasks.save_to(storage.get_file_path());
         return output;
     }
 

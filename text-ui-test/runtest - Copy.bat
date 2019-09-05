@@ -2,12 +2,14 @@
 
 REM create bin directory if it doesn't exist
 if not exist ..\bin mkdir ..\bin
-if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM delete output from previous run
+if exist ACTUAL.TXT del ACTUAL.TXT
 
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\Duke.java
+SET MY_FOLDER = C:\Users\Zheng Wen\Documents\duke\src\main\java
+SET DUKE = C:\Users\Zheng Wen\Documents\duke\src\main\java\Duke.java
+javac  -cp %MY_FOLDER%/*.java -Xlint:none -d ..\bin -sourcepath ..\src\main\java\Duke.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
@@ -19,5 +21,3 @@ java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
 
 REM compare the output to the expected output
 FC ACTUAL.TXT EXPECTED.TXT
-
-pause

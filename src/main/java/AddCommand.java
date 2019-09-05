@@ -17,6 +17,7 @@ public class AddCommand extends Command {
         else if (tasktype.equals("deadline")) tasks.add(new Deadline(description, datetime, false));
         else if (tasktype.equals("event")) tasks.add(new Event(description, datetime, false));
         else throw new DukeException("add error");
+        tasks.save_to(storage.get_file_path());
         return ui.showTaskAdded(tasks.get(tasks.size()-1).toString(), tasks.size());
     }
 
