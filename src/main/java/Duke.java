@@ -2,11 +2,7 @@ import java.io.*;
 import java.text.Normalizer;
 import java.util.NoSuchElementException;
 //
-//import javafx.application.Application;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Label;
-//import javafx.stage.Stage;
-//
+
 //import javafx.scene.control.Button;
 //import javafx.scene.control.ScrollPane;
 //import javafx.scene.control.TextField;
