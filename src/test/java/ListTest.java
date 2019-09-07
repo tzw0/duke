@@ -10,16 +10,25 @@ public class ListTest {
     @Test
     public void Test() {
         try {
-            new Todo("a a a /by 12/13/12 9934)", false).toString();
-            new Todo("a a a /at 12/13/12 9934)", false).toString();
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("abcdef", false));
+            tasks.add(new Todo("zxcv", false));
+            if (tasks.print_list().indexOf("Here are the tasks in your list:") > -1)
+                assert true;
+            else assert false;
         } catch (DukeException e) {
+            assert false;
+        } catch (Exception e) {
             assert false;
         }
         try {
-            new Todo("", false).toString();
+            TaskList tasksEmpty = new TaskList();
+            tasksEmpty.print_list();
             assert false;
         } catch (DukeException e) {
             assert true;
+        } catch (Exception e) {
+            assert false;
         }
     }
 }

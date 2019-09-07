@@ -10,16 +10,16 @@ public class FindTest {
     @Test
     public void Test() {
         try {
-            new Todo("a a a /by 12/13/12 9934)", false).toString();
-            new Todo("a a a /at 12/13/12 9934)", false).toString();
+            TaskList tasks = new TaskList();
+            tasks.add(new Todo("abcdef", false));
+            tasks.add(new Todo("zxcv", false));
+            if (tasks.find("abcdef").indexOf("abcdef") > -1 && tasks.find("abcdef").indexOf("zxcv") == -1 && tasks.find("abczxc").indexOf("Sorry") > -1)
+                assert true;
+            else assert false;
         } catch (DukeException e) {
             assert false;
-        }
-        try {
-            new Todo("", false).toString();
+        } catch (Exception e) {
             assert false;
-        } catch (DukeException e) {
-            assert true;
         }
     }
 }

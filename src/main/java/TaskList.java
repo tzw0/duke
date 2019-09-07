@@ -94,7 +94,7 @@ public class TaskList extends ArrayList<Task>{
             }
         }
         if (have_result == false) {
-            return ("☹ Sorry, no results found");
+            return ("Sorry, no results found");
         }
         return output;
     }

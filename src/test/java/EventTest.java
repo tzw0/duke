@@ -29,6 +29,5 @@ public class EventTest {
             new Event("asfvfs 134", "30/2/12 2300", false);
             assert false;
         } catch (DukeException e) { }
-        assert true;
     }
 }

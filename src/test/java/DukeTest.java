@@ -13,30 +13,30 @@ public class DukeTest {
     }
     @Test
     public void DeleteTest() {
-        new DeadlineTest().Test();
+        new DeleteTest().Test();
     }
     @Test
     public void DoneTest() {
-        new DeadlineTest().Test();
+        new DoneTest().Test();
     }
     @Test
     public void EventTest() {
-        new DeadlineTest().Test();
+        new EventTest().Test();
     }
     @Test
     public void FindTest() {
-        new DeadlineTest().Test();
+        new FindTest().Test();
     }
     @Test
     public void ListTest() {
-        new DeadlineTest().Test();
+        new ListTest().Test();
     }
     @Test
     public void ParserTest() {
-        new DeadlineTest().Test();
+        new ParserTest().Test();
     }
     @Test
     public void Todo() {
-        new DeadlineTest().Test();
+        new TodoTest().Test();
     }
 }
