@@ -1,8 +1,14 @@
+/**
+ * Represents a Task recorded by Duke task manager
+ */
 public class Task {
         protected String description;
         protected boolean isDone;
         protected String tt;
         protected String extra;
+        /**
+         * Creates a Task object with the given description and whether it is done
+         */
         public Task(String description, boolean b)  throws DukeException {
             this.tt = "";
             this.extra = "";
@@ -12,19 +18,25 @@ public class Task {
                 throw new DukeException("empty task");
             }
         }
-        public String extra_() {return this.extra;}
-        public String task_type() {return this.tt;}
-        public Boolean is_Done() {
-            return this.isDone; //return tick or X symbols
+        /**
+         * Pack the Task in the form of a string with the given separator for writing to a file
+         * @param sep the separator used
+         */
+        public String save_as(String sep) {
+            return tt + sep + isDone + sep + description + sep + extra + "\n";
         }
-        public String describe() {
-                return this.description;
-        }
+        /**
+         * Mark a Task as b
+         * @param b checked or not checked
+         */
         public void done(boolean b) {
             this.isDone = b;
         }
+        /**
+         * Represents the object of this class as a string
+         * @return that string
+         */
         public String toString() {
-//            return (isDone ? "[✓] " : "[✗] ") + this.description;
             return (isDone ? "[Done] " : "[X] ") + this.description;
         }
 }

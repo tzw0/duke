@@ -1,10 +1,13 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
+import java.io.*;
+/**
+ * Represents a storage file inside data
+ */
 public class Storage {
     private String file_content;
     private String file_path;
+    /**
+     * Create a storage file found at filepath
+     */
     public Storage (String filePath){
         file_path = filePath;
         file_content = "";
@@ -17,13 +20,30 @@ public class Storage {
             System.out.println(filePath + " file not found, creating file...");
         }
     }
+    /**
+     * Laod the file from the filepath
+     * @return the file in the form of a string
+     */
     public String load () throws DukeException {
         if (file_content.isBlank()) {
             throw new DukeException("file_not_found");
         }
         return file_content;
     }
-    public String get_file_path() {
-        return file_path;
+    /**
+     * Save the tasklist given to the filepath
+     * @param tasks the tasklist to be saved
+     */
+    public void save(TaskList tasks) {
+        String sep = "}-}";
+        String output = "";
+        for (Task i : tasks) {
+            output += i.save_as(sep);
+        }
+        try (PrintWriter out = new PrintWriter(file_path)) {
+            out.println(output);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

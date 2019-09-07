@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 import static java.lang.System.*;
-
+/**
+ * Represents the user interface
+ */
 public class Ui {
     Scanner input = new Scanner(System.in);
     private String line = " ____________________________________________________________";
@@ -10,6 +12,9 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+    /**
+     * Shows and returns the welcome message
+     */
     public String showWelcome() {
         System.out.println(line);
         System.out.print(logo);
@@ -19,21 +24,36 @@ public class Ui {
         System.out.println(line);
         return "Hello! I'm Duke" + "\nWhat can I do for you?";
     }
+    /**
+     * Shows a line
+     */
     public String showLine() {
         System.out.println(line);
         return "";
     }
+    /**
+     * Shows and returns whatever string is passed into the function
+     */
     public String print_this(String thingy) {
         System.out.println(thingy);
         return thingy;
     }
+    /**
+     * Reads and returns user input from keyboard
+     */
     public String readCommand() {
         return input.nextLine();
     }
+    /**
+     * Shows the goodbye message
+     */
     public String close() {
         System.out.println("Bye. Hope to see you again soon!");
         return "";
     }
+    /**
+     * Shows and returns the error message
+     */
     public String showError(String error_msg) {
         String out_ = "";
         if(error_msg.equals("datetime")) {
@@ -59,22 +79,34 @@ public class Ui {
         System.out.println(out_);
         return out_;
     }
+    /**
+     * Shows and returns the loading error
+     */
     public String showLoadingError() {
         String out_ = "OOPS!!! I'm sorry, but your saved file cannot be found";
         System.out.println(out_);
         return out_;
     }
+    /**
+     * Shows and returns the given taska as done
+     */
     public String showTaskDone(String task) {
 //        String out_ = "Nice! I've marked this task as done:\n" + "[✓] " + task;
-        String out_ = "Nice! I've marked this task as done:\n" + "[Done] " + task;
+        String out_ = "Nice! I've marked this task as done:\n" + task;
         System.out.println(out_);
         return out_;
     }
+    /**
+     * Shows and returns the given task as deleted
+     */
     public String showTaskDelete(String task, int size) {
         String out_ = "Noted. I've removed this task:" + "\n" + "\t" + task + "\n" + "Now you have " + Integer.toString(size) + " tasks in the list.";
         System.out.println(out_);
         return out_;
     }
+    /**
+     * Shows and returns the given task as added
+     */
     public String showTaskAdded(String task, int size) {
         String out_ = "Got it. I've added this task:" + "\n" + "\t" + task  +"\n" + "Now you have " + Integer.toString(size) + " tasks in the list.";
         System.out.println(out_);

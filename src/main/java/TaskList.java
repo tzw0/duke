@@ -1,24 +1,22 @@
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Represents the tasklist that duke is managing
+ */
 public class TaskList extends ArrayList<Task>{
     String sep = "}-}";
-    public void save_to(String absolutePath) {
-        String output = "";
-        for (Task i : this) {
-            output += i.task_type() + sep + i.is_Done().toString() + sep + i.describe() + sep + i.extra_() + "\n";
-        }
-        try (PrintWriter out = new PrintWriter(absolutePath)) {
-            out.println(output);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    /**
+     * Creates an empty task list
+     */
     public TaskList() {
     }
+    /**
+     * Creates a task list from file
+     * @param file the file in the form of a string to be converted to the task list
+     */
     public TaskList(String file) {
         if (file.isBlank()) {
             return;
@@ -32,9 +30,9 @@ public class TaskList extends ArrayList<Task>{
                 if (attributes[0].equals("T")) {
                     this.add(new Todo(attributes[2], attributes[1].equals("true")));
                 } else if (attributes[0].equals("D")) {
-                    this.add(new Deadline(attributes[2], DatetimeCustom.check(attributes[3]), attributes[1].equals("true")));
+                    this.add(new Deadline(attributes[2], DatetimeFormatter.check(attributes[3]), attributes[1].equals("true")));
                 } else if (attributes[0].equals("E")) {
-                    this.add(new Event(attributes[2], DatetimeCustom.check(attributes[3]), attributes[1].equals("true")));
+                    this.add(new Event(attributes[2], DatetimeFormatter.check(attributes[3]), attributes[1].equals("true")));
                 } else {
                     System.out.println("☹ OOPS!!! Line " + Integer.toString(line) + " in duke.txt is corrupted" + ", skipping...");
                 }
@@ -45,6 +43,10 @@ public class TaskList extends ArrayList<Task>{
             }
         }
     }
+    /**
+     * Formats the task list in a readable format
+     * @return a task list in the form of a string
+     */
     public String print_list() throws DukeException{
         if (this.size()== 0) throw new DukeException("empty list");
         String output ="Here are the tasks in your list:";
@@ -57,13 +59,25 @@ public class TaskList extends ArrayList<Task>{
         }
         return output;
     }
-
+    /**
+     * Deletes the task at given index
+     */
     public void deleteTask(int index) {
         this.remove(index);
     }
+
+    /**
+     * Marks the task at given index as done
+     */
     public void doneTask(int index) {
         this.get(index).done(true);
     }
+
+    /**
+     * Searches for a task with the given keyword
+     * @param keyword to be found
+     * @return The list of task with the keyword
+     */
     public String find(String keyword) {
         int x = 0;
         String output = "Here are the matching tasks in your list:";

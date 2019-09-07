@@ -1,19 +1,19 @@
+/**
+ * Represents a command that checks items as done in tasks
+ */
 public class DoneCommand extends Command {
     private int index;
     public DoneCommand(int index) {
         this.index = index;
     }
-    @Override
+    /**
+     * Executes the DoneCommand
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.index >= tasks.size()) throw new DukeException("index error");
-        String output = ui.showTaskDone(tasks.get(this.index).describe());
         tasks.doneTask(this.index);
-        tasks.save_to(storage.get_file_path());
+        String output = ui.showTaskDone(tasks.get(this.index).toString());
+        storage.save(tasks);
         return output;
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

@@ -1,4 +1,12 @@
-public class DatetimeCustom extends Exception {
+/**
+ * Represents a datetime formatter
+ */
+public class DatetimeFormatter {
+    /**
+     * Validates that the datetime is valid
+     * @param str1 the datetime in the form of a String to be checked
+     * @return str1 back if it is a valid datetime
+     */
     public static String check(String str1) throws DukeException {
         try {
             str1 = str1.trim();
@@ -17,7 +25,7 @@ public class DatetimeCustom extends Exception {
             Integer min_i = Integer.parseInt(min);
             Integer hr_i = Integer.parseInt(hr);
             if (hr_i > 23 || min_i > 59 || month_i > 12 || year_i < 0 || day_i > daysinmonth[month_i - 1])
-                throw new DukeException("datetime_N");
+                throw new DukeException("datetime");
             return str1;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("datetime");
@@ -25,7 +33,11 @@ public class DatetimeCustom extends Exception {
             throw new DukeException("datetime");
         }
     }
-
+    /**
+     * Formats the datetime object to match the exact format required
+     * @param str1 the datetime in the form of a String to be formatted
+     * @return the datetime in the exact format required
+     */
     public static String view(String str1) {
         try {
             str1 = str1.trim();

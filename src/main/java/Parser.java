@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * Represents a parser to make sense of user input and translate it to commands for Duke
+ */
 public class Parser {
+    /**
+     * Interprets user input
+     * @param input to be interpreted
+     * @return Duke commands based on user input
+     */
     public static Command parse(String input) throws DukeException { //input validation
         ArrayList<String> command_list = new ArrayList<String>(Arrays.asList("bye", "list", "find", "delete", "done", "todo", "deadline", "event"));
         String operation;
