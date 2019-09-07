@@ -5,6 +5,7 @@ public class DeleteCommand extends Command {
     private int index;
     /**
      * Creates a new DeleteCommand object with the given index
+     * @param index of the task to be deleted
      */
     public DeleteCommand(int index) {
         this.index = index;

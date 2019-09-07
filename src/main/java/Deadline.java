@@ -12,6 +12,10 @@ public class Deadline extends Task {
     DateFormat fmt = new SimpleDateFormat("dd MMMM yyyy, h:mm a", Locale.US);
     /**
      * Creates a Deadline object with the given description, datetime and whether it is done
+     * @param description of the task
+     * @param by the due datetime of the deadline
+     * @param b if the task is checked
+     * @throws DukeException if the deadline is not valid
      */
     public Deadline(String description, String by,boolean b) throws DukeException {
         super(description, b);

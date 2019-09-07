@@ -13,33 +13,34 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     /**
-     * Shows and returns the welcome message
+     * Shows the welcome message
      */
-    public String showWelcome() {
+    public void showWelcome() {
         System.out.println(line);
         System.out.print(logo);
         System.out.println(line);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
         System.out.println(line);
-        return "Hello! I'm Duke" + "\nWhat can I do for you?";
     }
     /**
      * Shows a line
      */
-    public String showLine() {
+    public void showLine() {
         System.out.println(line);
-        return "";
     }
     /**
-     * Shows and returns whatever string is passed into the function
+     * Shows and
+     * @return whatever string is passed into the function
+     * @param thingy to be printed
      */
     public String print_this(String thingy) {
         System.out.println(thingy);
         return thingy;
     }
     /**
-     * Reads and returns user input from keyboard
+     * Reads and
+     * @return user input from keyboard
      */
     public String readCommand() {
         return input.nextLine();
@@ -47,12 +48,13 @@ public class Ui {
     /**
      * Shows the goodbye message
      */
-    public String close() {
+    public void close() {
         System.out.println("Bye. Hope to see you again soon!");
-        return "";
     }
     /**
      * Shows and returns the error message
+     * @param error_msg the error message to be formatted and printed
+     * @return the formatted error message
      */
     public String showError(String error_msg) {
         String out_ = "";
@@ -81,6 +83,7 @@ public class Ui {
     }
     /**
      * Shows and returns the loading error
+     * @return loading error
      */
     public String showLoadingError() {
         String out_ = "OOPS!!! I'm sorry, but your saved file cannot be found";
@@ -88,7 +91,9 @@ public class Ui {
         return out_;
     }
     /**
-     * Shows and returns the given taska as done
+     * Shows and
+     * @return the given taska as done
+     * @param task to be displayed as done
      */
     public String showTaskDone(String task) {
 //        String out_ = "Nice! I've marked this task as done:\n" + "[✓] " + task;
@@ -97,7 +102,10 @@ public class Ui {
         return out_;
     }
     /**
-     * Shows and returns the given task as deleted
+     * Shows and
+     * @return the given task as deleted
+     * @param task to be shown as deleted
+     * @param size of the task list
      */
     public String showTaskDelete(String task, int size) {
         String out_ = "Noted. I've removed this task:" + "\n" + "\t" + task + "\n" + "Now you have " + Integer.toString(size) + " tasks in the list.";
@@ -105,7 +113,10 @@ public class Ui {
         return out_;
     }
     /**
-     * Shows and returns the given task as added
+     * Shows and
+     * @return the given task as added
+     * @param task to be shown as added
+     * @param size of the task list
      */
     public String showTaskAdded(String task, int size) {
         String out_ = "Got it. I've added this task:" + "\n" + "\t" + task  +"\n" + "Now you have " + Integer.toString(size) + " tasks in the list.";

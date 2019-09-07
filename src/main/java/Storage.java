@@ -7,6 +7,7 @@ public class Storage {
     private String file_path;
     /**
      * Create a storage file found at filepath
+     * @param filePath to be used for storage
      */
     public Storage (String filePath){
         file_path = filePath;
@@ -23,6 +24,7 @@ public class Storage {
     /**
      * Laod the file from the filepath
      * @return the file in the form of a string
+     * @throws DukeException if the file cannot be found or if there is no task in the list
      */
     public String load () throws DukeException {
         if (file_content.isBlank()) {

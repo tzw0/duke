@@ -12,6 +12,10 @@ public class Event extends Task{
     DateFormat fmt = new SimpleDateFormat("dd MMMM yyyy, h:mm a", Locale.US);
     /**
      * Creates an Event object with the given description, datetime and whether it is done
+     * @param description of the Event
+     * @param b if the task is checked or not
+     * @param at the date and time of the event
+     * @throws DukeException if there is an error in creating the event
      */
     public Event(String description, String at, boolean b) throws DukeException{
         super(description, b);

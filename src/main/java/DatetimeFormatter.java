@@ -6,6 +6,7 @@ public class DatetimeFormatter {
      * Validates that the datetime is valid
      * @param str1 the datetime in the form of a String to be checked
      * @return str1 back if it is a valid datetime
+     * @throws DukeException if str1 is not a valid datetime
      */
     public static String check(String str1) throws DukeException {
         try {

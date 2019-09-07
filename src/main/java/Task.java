@@ -8,6 +8,9 @@ public class Task {
         protected String extra;
         /**
          * Creates a Task object with the given description and whether it is done
+         * @param description of the task
+         * @param b if a task is checked
+         * @throws DukeException if an error has occured in constructing the task
          */
         public Task(String description, boolean b)  throws DukeException {
             this.tt = "";
@@ -21,6 +24,7 @@ public class Task {
         /**
          * Pack the Task in the form of a string with the given separator for writing to a file
          * @param sep the separator used
+         * @return the save form of a task
          */
         public String save_as(String sep) {
             return tt + sep + isDone + sep + description + sep + extra + "\n";

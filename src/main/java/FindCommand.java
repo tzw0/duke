@@ -5,6 +5,7 @@ public class FindCommand extends Command {
     private String keyword;
     /**
      * Creates a new FindCommand object with the given keyword
+     * @param keyword used to find task
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;

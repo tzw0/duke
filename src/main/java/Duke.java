@@ -34,6 +34,7 @@ public class Duke  extends Application {
 
     /**
      * Create a task manager with a task list from an existing file
+     * @param file to create a task list from
      */
     public Duke(String file) {
         String directory = System.getProperty("user.home");
@@ -74,6 +75,7 @@ public class Duke  extends Application {
 
     /**
      * Da shit
+     * @param args i have no idea what this is for
      */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();

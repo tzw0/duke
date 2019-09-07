@@ -46,6 +46,7 @@ public class TaskList extends ArrayList<Task>{
     /**
      * Formats the task list in a readable format
      * @return a task list in the form of a string
+     * @throws DukeException if the list is empty
      */
     public String print_list() throws DukeException{
         if (this.size()== 0) throw new DukeException("empty list");
@@ -61,6 +62,7 @@ public class TaskList extends ArrayList<Task>{
     }
     /**
      * Deletes the task at given index
+     * @param index of the task to be deleted
      */
     public void deleteTask(int index) {
         this.remove(index);
@@ -68,6 +70,7 @@ public class TaskList extends ArrayList<Task>{
 
     /**
      * Marks the task at given index as done
+     * @param index of the task to be marked as done
      */
     public void doneTask(int index) {
         this.get(index).done(true);

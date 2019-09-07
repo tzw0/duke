@@ -8,6 +8,7 @@ public class Parser {
      * Interprets user input
      * @param input to be interpreted
      * @return Duke commands based on user input
+     * @throws DukeException if Duke cannot make sense of the input
      */
     public static Command parse(String input) throws DukeException { //input validation
         ArrayList<String> command_list = new ArrayList<String>(Arrays.asList("bye", "list", "find", "delete", "done", "todo", "deadline", "event"));

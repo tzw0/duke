@@ -5,6 +5,7 @@ public class DukeException extends Exception {
     private String error;
     /**
      * Creates a new DukeException of e
+     * @param e The error message
      */
     public DukeException(String e) {
         this.error = e;

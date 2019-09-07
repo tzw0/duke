@@ -7,6 +7,8 @@ public class AddCommand extends Command {
     private String datetime;
     /**
      * Creates a new AddCommand object with the given type of task and description
+     * @param tasktype The task type
+     * @param description of the task
      */
     public AddCommand(String tasktype, String description) {
         this.description = description;
@@ -14,6 +16,9 @@ public class AddCommand extends Command {
     }
     /**
      * Creates a new AddCommand object with the given type of task, description and date time
+     * @param tasktype The task type
+     * @param description of the task
+     * @param datetime the date and time
      */
     public AddCommand(String tasktype, String description, String datetime) {
         this.description = description;
@@ -22,6 +27,10 @@ public class AddCommand extends Command {
     }
     /**
      * Executes the AddCommand and saves changes to storage
+     * @param tasks the task list
+     * @param storage the storage file
+     * @param ui the user interface object
+     * @return ui response as a string
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasktype.equals("todo")) tasks.add(new Todo(description, false));

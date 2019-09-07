@@ -8,6 +8,8 @@ public abstract class Command {
      * @param tasks The task list that you want to execute the command on
      * @param ui The user interface object used to respond to the user
      * @param storage The storage object used to save the changes made by the executed command
+     * @return the response as a string from the user interface
+     * @throws DukeException if command cannot be executed
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
     /**

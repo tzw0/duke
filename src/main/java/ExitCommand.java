@@ -5,8 +5,9 @@ public class ExitCommand extends Command {
     /**
      * Executes the ExitCommand
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         super.is_exit = true;
-        return ui.close();
+        ui.close();
+        return "";
     }
 }
